@@ -5,9 +5,11 @@ var StringUtils = (function () {
         var div = document.createElement('div');
         div.innerHTML = source;
 
-        var result = {};
+        var result;
         var process = function (nodes, accu) {
             for (var i = 0; index > -1 && i < nodes.length; i++) {
+                if (result) return;
+
                 var node = nodes[i];
                 if (3 === node.nodeType) accu.push(node);
 
@@ -17,7 +19,7 @@ var StringUtils = (function () {
         };
         process(div.childNodes, []);
 
-        return {parent: div, found: result};
+        return {parent: div, found: result || {} };
     };
 
     return {
